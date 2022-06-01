@@ -54,10 +54,12 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                 <li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>
             </ul>
-            <button class="btn btn-outline-dark" type="submit">
-              <i class="bi-cart-fill me-1"></i>
-              Cart
+            <button>
+            <a class="link-item text-dark" href="cart.php">
+              <i class="bi-cart-fill me-1 nav-item"></i>
+             Cart 
               <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+              </a>
             </button>
           </form>
         </div>
