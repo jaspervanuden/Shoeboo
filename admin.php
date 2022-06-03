@@ -27,8 +27,9 @@ if(isset($_SESSION['username'])){?>
       <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-white">
             <div class="centered">
-              <a href="database.php"><button type="button" class="btn btn-primary btn-lg">database</button></a>
+              <a href="database.php"><button type="button" class="btn btn-secondary btn-lg">database</button></a>
               <a href="bestellingen.php"><button type="button" class="btn btn-secondary btn-lg">bestellingen</button></a>
+              <a href="gebruikers.php"><button type="button" class="btn btn-secondary btn-lg">gebruikers</button></a>
             </div>
           </div>
         </div>
