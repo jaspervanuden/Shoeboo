@@ -1,19 +1,13 @@
 <?php
 include_once "connection.php";
 if(isset($_SESSION['username'])){?>
-   <p><?php echo "welcome " . $_SESSION['username']; ?> <a href="logout.php"> uitloggen</a></p>
+<div class="text-center">
+   <h1><?php echo "welcome " . $_SESSION['username']; ?> <a href="logout.php"> uitloggen</a></h1>
+   </div>
    <?php
 }  else {
     header("location: login.php");
-} 
-$sql = "SELECT * FROM shoes";
-$stmt = $conn->prepare($sql);
-$stmt->execute();
-//  WHERE TYPE = "male" (voor welke tabel)
-//$stmt->debugDumpParams();
-
-$result = $stmt->fetchAll();
-?>
+} ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,33 +23,22 @@ $result = $stmt->fetchAll();
 </head>
 <body>
 <body>
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">name</th>
-      <th scope="col">prijs</th>
-      <th scope="col">gender</th>
-      <th scope="col">edit</th>
-      <th scope="col">delete</th>
-      <th> <a href="insert.php">toevoegen</a> </th>
-    </tr>
-  </thead>
-  <tbody>
-  <?php
-foreach($result as $res){ ?>
-    <tr>
-      <td><?php echo $res['ID'];?></td>
-      <td><?php echo $res['name'];?></td>
-      <td><?php echo $res['price'];?></td>
-      <td><?php echo $res['gen'];?></td>
-      <td> <a href="edit.php?id=<?php echo $res["ID"];?>">edit</a> </td>
-      <td> <a href="delete.php?id=<?php echo $res["ID"];?>">delete</a> </td>
-    </tr>
-    <?php
-}
-?>
-  </tbody>
-</table>
+<header class="bg-secondary py-5">
+      <div class="container px-4 px-lg-5 my-5">
+        <div class="text-center text-white">
+            <div class="centered">
+            <button type="button" class="btn btn-primary btn-lg">database</button>
+        <button type="button" class="btn btn-secondary btn-lg">bestellingen</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+  <div class="container">
+      <div class="justify-content-center">
+        <button type="button" class="btn btn-primary btn-lg">database</button>
+        <button type="button" class="btn btn-secondary btn-lg">bestellingen</button>
+      </div>
+  </div>
 </body>
 </html>

@@ -107,11 +107,25 @@ $results = $stmt->fetchAll();
                   <!-- Product name-->
                   <h5 class="fw-bolder"><?php echo $res['name'];?></h5>
                   <!-- Product price-->
-                  <p class="card-text">prijs: €<?php echo $res['price'];?></p>          
+                  <p class="card-text">prijs: €<?php echo $res['price'];?></p>    
+                  <button class="btn btn-dark btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  size
+                </button>
+                <div class="dropdown-menu">
+                <a class="dropdown-item" >us 7</a>
+                <a class="dropdown-item" >us 7,5</a>
+                <a class="dropdown-item" >us 8</a>
+                <a class="dropdown-item" >us 8,5</a>
+                <a class="dropdown-item" >us 9</a>
+                <a class="dropdown-item" >us 9,5</a>
+                <a class="dropdown-item" >us 10</a>
+                <a class="dropdown-item" >s 10,5</a>
+                <a class="dropdown-item" >us 11</a>
+                </div>      
                 </div>
               </div>
               <!-- Product actions-->
-              <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+              <div class="card-footer p-4 pt-0 border-top-0 bg-transparent ">
                 <div class="text-center">
                   <a class="btn btn-outline-dark mt-auto" href="#"
                     >add to card</a
