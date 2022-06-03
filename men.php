@@ -108,7 +108,7 @@ $results = $stmt->fetchAll();
                   <h5 class="fw-bolder"><?php echo $res['name'];?></h5>
                   <!-- Product price-->
                   <p class="card-text">prijs: €<?php echo $res['price'];?></p>    
-                  <button class="btn btn-dark btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <!-- <button class="btn btn-dark btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   size
                 </button>
                 <div class="dropdown-menu">
@@ -121,7 +121,7 @@ $results = $stmt->fetchAll();
                 <a class="dropdown-item" >us 10</a>
                 <a class="dropdown-item" >s 10,5</a>
                 <a class="dropdown-item" >us 11</a>
-                </div>      
+                </div>       -->
                 </div>
               </div>
               <!-- Product actions-->
