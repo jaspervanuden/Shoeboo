@@ -23,22 +23,16 @@ if(isset($_SESSION['username'])){?>
 </head>
 <body>
 <body>
-<header class="bg-secondary py-5">
+<header class="bg-white py-5">
       <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-white">
             <div class="centered">
-            <button type="button" class="btn btn-primary btn-lg">database</button>
-        <button type="button" class="btn btn-secondary btn-lg">bestellingen</button>
+              <a href="database.php"><button type="button" class="btn btn-primary btn-lg">database</button></a>
+              <a href="bestellingen.php"><button type="button" class="btn btn-secondary btn-lg">bestellingen</button></a>
             </div>
           </div>
         </div>
       </div>
     </header>
-  <div class="container">
-      <div class="justify-content-center">
-        <button type="button" class="btn btn-primary btn-lg">database</button>
-        <button type="button" class="btn btn-secondary btn-lg">bestellingen</button>
-      </div>
-  </div>
 </body>
 </html>

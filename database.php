@@ -2,7 +2,7 @@
 include_once "connection.php";
 if(isset($_SESSION['username'])){?>
 <div class="text-center">
-   <h1><a href="logout.php"> uitloggen</a></h1>
+   <h1><a href="logout.php"> uitloggen</a></h1> <h2><a href="admin.php">Terug</a></h2>
    </div>
    <?php
 }  else {
