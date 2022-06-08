@@ -1,7 +1,7 @@
 <?php
 include_once "connection.php";
-if(isset($_SESSION['username'])){?>
-<div class="text-center">
+if(isset($_SESSION['username']) && (isset($_SESSION['role']) && $_SESSION['role'] == 1)){?>
+    <div class="text-center">
    <h1><a href="logout.php"> uitloggen</a></h1> <h2><a href="admin.php">Terug</a></h2>
    </div>
    <?php

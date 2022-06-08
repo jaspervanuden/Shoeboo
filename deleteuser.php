@@ -1,6 +1,6 @@
 <?php
 include 'connection.php';
-if(isset($_SESSION['username'])){
+if(isset($_SESSION['username']) && (isset($_SESSION['role']) && $_SESSION['role'] == 1)){
     //echo "welcome " . $_SESSION['username'];
 } else {
     header("location: admin.php");

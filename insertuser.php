@@ -2,7 +2,7 @@
 
   include_once "connection.php";
 
-  if(isset($_SESSION['username'])){?>
+  if(isset($_SESSION['username']) && (isset($_SESSION['role']) && $_SESSION['role'] == 1)){?>
     <p><?php echo "welcome " . $_SESSION['username']; ?></p>
     <?php
   }  else {

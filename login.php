@@ -84,18 +84,23 @@
 include_once "connection.php";
 
 if(isset($_POST['username']) && isset($_POST['password'])){
-    $sql = "SELECT * FROM admin WHERE username = :username AND password = :password";
+    $sql = "SELECT * FROM users WHERE username = :username AND password = :password";
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(":username", $_POST['username']);
     $stmt->bindParam(":password", $_POST['password']);
     $stmt->execute();
 
-    $result = $stmt->fetchAll();
+    $result = $stmt->fetch();
 
-    if(count($result) > 0){
+    if($result['role'] == 1){
         $_SESSION["username"] = $_POST['username'];
+        $_SESSION['role'] = $result['role'];
         header('Location: admin.php');
-    exit();
+            
+    }elseif($result['role'] == 0){
+      $_SESSION["username"] = $_POST['username'];
+      $_SESSION['role'] = $result['role'];
+      header('location: index.php');
         
     } else {
         echo "gebruikersnaam en of wachtwoord onjuist";
@@ -123,7 +128,8 @@ if(isset($_POST['username']) && isset($_POST['password'])){
                       <input type="password" id="password" name="password" class="form-control form-control-lg" value=""/>
                       <label class="form-label" for="typePasswordX">Password</label>
                     </div>      
-                    <input class="btn btn-outline-light btn-lg px-5" type="submit" value="login"/>     
+                    <input class="btn btn-outline-light btn-lg px-5" type="submit" value="login"/>
+                   <a href="makeaccount.php"><input class="btn btn-outline-light btn-lg px-5" type="button" value="make account"/>  </a>        
                     </form> 
                   </div>      
                 </div>

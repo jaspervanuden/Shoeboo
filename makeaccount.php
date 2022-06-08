@@ -1,12 +1,3 @@
-<?php include_once "connection.php";
-
-//dit stuk haalt de data op
-$sql = "SELECT * FROM `shoes` WHERE `gen` = 'populair'";
-$stmt = $conn->prepare($sql);
-$stmt->execute();
-//haal alle data op en knal die in een variabele genaam results
-$results = $stmt->fetchAll();
-?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -30,8 +21,9 @@ $results = $stmt->fetchAll();
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-      crossorigin="anonymous"/>
-      <link rel="stylesheet" href="style/style.css">
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style/style.css">
   </head>
   <body>
     <!-- Navigation-->
@@ -52,19 +44,16 @@ $results = $stmt->fetchAll();
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
             <li class="nav-item">
-              <a class="nav-link fw-bolder aria-current="page" href="index.php">Home</a>
+              <a class="nav-link aria-current="page" href="index.php">Home</a>
             </li>
-            <li class="nav-item"><a class="nav-link" href="men.php">men</a></li>
+            <li class="nav-item"><a class="nav-link " href="men.php">men</a></li>
             <li class="nav-item"><a class="nav-link" href="women.php">women</a></li>
             <li class="nav-item"><a class="nav-link" href="about.php">About</a></li>
           </ul>
           <form class="d-flex">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-              <li class="nav-item"><a class="nav-link" href="login.php">
-                <?php echo  isset($_SESSION["username"]) ? 'welkom ' .$_SESSION["username"] : 'login' ?>
-              </a></li>
-              <li class="nav-item"><a class="nav-link" href="logout.php">logout</a></li>
-          </ul>        
+                <li class="nav-item"><a class="nav-link fw-bolder" href="login.php">Login</a></li>
+            </ul>
             <button>
             <a class="link-item text-dark" href="cart.php">
               <i class="bi-cart-fill me-1 nav-item"></i>
@@ -77,7 +66,7 @@ $results = $stmt->fetchAll();
       </div>
     </nav>
     <!-- Header-->
-    <header class="bg-dark py-5">
+    <!-- <header class="bg-dark py-5">
       <div class="container px-4 px-lg-5 my-5">
         <div class="text-center text-white">
           <div class="af1">
@@ -89,58 +78,74 @@ $results = $stmt->fetchAll();
           <p class="lead fw-normal text-white-50 mb-0">The king of shoes</p>
         </div>
       </div>
-    </header>
+    </header> -->
     <!-- Section-->
-    <section class="py-5">
-      <div class="container px-4 px-lg-5 mt-5">
-      <h1 class="text-center">most populair</h1>
-      <br>
-        <div
-          class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"
-        >
-        <?php foreach($results as $res){   ?>
+    <?php 
+include_once "connection.php";
 
-          <div class="col mb-5">
-            <div class="card h-100">
-              <!-- Product image-->
-              <img
-                class="card-img-top"
-                src="img/<?php echo $res['img']?>"
-                alt="..."
-              />
-              <!-- Product details-->
-              <div class="card-body p-4">
-                <div class="text-center">
-                  <!-- Product name-->
-                  <h5 class="fw-bolder"><?php echo $res['name'];?></h5>
-                  <!-- Product price-->
-                  <p class="card-text">prijs: €<?php echo $res['price'];?></p>          
-                </div>
-              </div>
-              <!-- Product actions-->
-              <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                <div class="text-center">
-                  <a class="btn btn-outline-dark mt-auto" href="#"
-                    >add to card</a
-                  >
+if(isset($_POST['username']) && isset($_POST['password'])){
+    $sql = "SELECT * FROM users WHERE username = :username AND password = :password";
+    $stmt = $conn->prepare($sql);
+    $stmt->bindParam(":username", $_POST['username']);
+    $stmt->bindParam(":password", $_POST['password']);
+    $stmt->execute();
+
+    $result = $stmt->fetch();
+
+    if($result['role'] == 1){
+        $_SESSION["username"] = $_POST['username'];
+        header('Location: admin.php');
+            
+    }elseif($result['role'] == 0){
+      $_SESSION["username"] = $_POST['username'];
+      header('location: index.php');
+        
+    } else {
+        echo "gebruikersnaam en of wachtwoord onjuist";
+    }
+} 
+?>
+    <section class="vh-100 gradient-custom">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+              <div class="card bg-dark text-white" style="border-radius: 1rem;">
+                <div class="card-body p-5 text-center">
+      
+                  <div class="mb-md-5 mt-md-4 pb-5">
+      
+                    <h2 class="fw-bold mb-2 text-uppercase">make account</h2>
+                    <p class="text-white-50 mb-5">Please enter your new username and password</p>
+                    <form action="login.php" method="post">
+                    <div class="form-outline form-white mb-4" id="loginForm">
+                      <input type="text" id="usernme" name="username" class="form-control form-control-lg" value=""/>
+                      <label class="form-label" for="typeEmailX">username</label>
+                    </div>
+      
+                    <div class="form-outline form-white mb-4">
+                      <input type="password" id="password" name="password" class="form-control form-control-lg" value=""/>
+                      <label class="form-label" for="typePasswordX">Password</label>
+                    </div>      
+                    <input class="btn btn-outline-light btn-lg px-5" type="submit" value="make account"/>     
+                    </form> 
+                  </div>      
                 </div>
               </div>
             </div>
           </div>
-
-    <?php  }   ?>
         </div>
-        <img class="rounded mx-auto d-block" src="img/sneaker.jpg" alt="">
-      </div>
-    </section>
+      </section>
+      <br>
+      <br>
+      <br>
     <!-- Footer-->
-    <footer class="py-5 bg-dark">
+    <!-- <footer class="py-5 bg-dark">
       <div class="container">
         <p class="m-0 text-center text-white">
-          Copyright &copy; Your Website 2022
+          Made by Jasper van Uden
         </p>
       </div>
-    </footer>
+    </footer> -->
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->
