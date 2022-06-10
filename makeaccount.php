@@ -44,7 +44,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
             <li class="nav-item">
-              <a class="nav-link aria-current="page" href="index.php">Home</a>
+              <a class="nav-link aria-current-page" href="index.php">Home</a>
             </li>
             <li class="nav-item"><a class="nav-link " href="men.php">men</a></li>
             <li class="nav-item"><a class="nav-link" href="women.php">women</a></li>
@@ -83,27 +83,19 @@
     <?php 
 include_once "connection.php";
 
-if(isset($_POST['username']) && isset($_POST['password'])){
-    $sql = "SELECT * FROM users WHERE username = :username AND password = :password";
+if(isset($_POST["submit"])){
+
+  $sql = "INSERT INTO users
+            (username, password)
+            VALUES
+            (:username, :password)
+    ";
     $stmt = $conn->prepare($sql);
-    $stmt->bindParam(":username", $_POST['username']);
-    $stmt->bindParam(":password", $_POST['password']);
+    $stmt->bindParam(':username', $_POST['username']);
+    $stmt->bindParam(':password', $_POST['password']);
     $stmt->execute();
-
-    $result = $stmt->fetch();
-
-    if($result['role'] == 1){
-        $_SESSION["username"] = $_POST['username'];
-        header('Location: admin.php');
-            
-    }elseif($result['role'] == 0){
-      $_SESSION["username"] = $_POST['username'];
-      header('location: index.php');
-        
-    } else {
-        echo "gebruikersnaam en of wachtwoord onjuist";
-    }
-} 
+    header("location: login.php");
+}
 ?>
     <section class="vh-100 gradient-custom">
         <div class="container py-5 h-100">
@@ -116,9 +108,9 @@ if(isset($_POST['username']) && isset($_POST['password'])){
       
                     <h2 class="fw-bold mb-2 text-uppercase">make account</h2>
                     <p class="text-white-50 mb-5">Please enter your new username and password</p>
-                    <form action="login.php" method="post">
+                    <form action="" method="post">
                     <div class="form-outline form-white mb-4" id="loginForm">
-                      <input type="text" id="usernme" name="username" class="form-control form-control-lg" value=""/>
+                      <input type="text" id="username" name="username" class="form-control form-control-lg" value=""/>
                       <label class="form-label" for="typeEmailX">username</label>
                     </div>
       
@@ -126,7 +118,7 @@ if(isset($_POST['username']) && isset($_POST['password'])){
                       <input type="password" id="password" name="password" class="form-control form-control-lg" value=""/>
                       <label class="form-label" for="typePasswordX">Password</label>
                     </div>      
-                    <input class="btn btn-outline-light btn-lg px-5" type="submit" value="make account"/>     
+                    <input class="btn btn-outline-light btn-lg px-5" type="submit" value="make account" name="toevoegen"/>     
                     </form> 
                   </div>      
                 </div>

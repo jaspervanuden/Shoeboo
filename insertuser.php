@@ -19,9 +19,8 @@
       $stmt = $conn->prepare($sql);
       $stmt->bindParam(':username', $_POST['username']);
       $stmt->bindParam(':password', $_POST['password']);
-      $stmt->bindParam(':role', $_POST['role']);
       $stmt->execute();
-      header("location: gebruikers.php");
+      header("location: login.php");
   }
 ?>
 
