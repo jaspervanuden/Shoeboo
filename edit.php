@@ -27,7 +27,7 @@ if(isset($_POST["edit"])){
         $stmt->bindParam(':gen', $_POST['gen']);
         $stmt->bindParam(':id', $data['ID']);
         $stmt->execute();
-        header("location: admin.php");
+        header("location: database.php");
 
 }
 

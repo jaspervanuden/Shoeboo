@@ -11,4 +11,4 @@ $sql = "DELETE FROM shoes WHERE ID = :id;
     $stmt = $conn->prepare($sql);
     $stmt->bindParam(':id', $_GET['id']);
     $stmt->execute();
-    header("location: admin.php");
+    header("location: database.php");

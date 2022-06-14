@@ -64,7 +64,7 @@
       $stmt->bindParam(':img', $_FILES['fileToUpload']['name']);
       $stmt->bindParam(':gen', $_POST['gen']);
       $stmt->execute();
-      header("location: admin.php");
+      header("location: database.php");
   }
 ?>
 
