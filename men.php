@@ -4,8 +4,28 @@
 $sql = "SELECT * FROM `shoes` WHERE `gen` = 'men'";
 $stmt = $conn->prepare($sql);
 $stmt->execute();
-//haal alle data op en knal die in een variabele genaam results
 $results = $stmt->fetchAll();
+
+if(isset($_POST["action"]) && $_POST["action"] == 'Add to cart'){
+    
+  if (!isset($_SESSION['cart'])){
+      $_SESSION['cart'] = [];
+  }
+  $addCart = $_POST['productID'];
+  $size = $_POST['aantal'];
+
+  if($size > 0 && filter_var($size, FILTER_VALIDATE_INT)){ 
+      if(isset($_SESSION['cart'][$addCart])){
+          $_SESSION['cart'] [$addCart] += $size;
+
+      } else{
+          $_SESSION['cart'] [$addCart] = $size;
+      }
+
+  } else {
+
+  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -104,32 +124,21 @@ $results = $stmt->fetchAll();
               <!-- Product details-->
               <div class="card-body p-4">
                 <div class="text-center">
+                  <form method="post" action="">
                   <!-- Product name-->
                   <h5 class="fw-bolder"><?php echo $res['name'];?></h5>
                   <!-- Product price-->
-                  <p class="card-text">prijs: €<?php echo $res['price'];?></p>    
-                  <!-- <button class="btn btn-dark btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  size
-                </button>
-                <div class="dropdown-menu">
-                <a class="dropdown-item" >us 7</a>
-                <a class="dropdown-item" >us 7,5</a>
-                <a class="dropdown-item" >us 8</a>
-                <a class="dropdown-item" >us 8,5</a>
-                <a class="dropdown-item" >us 9</a>
-                <a class="dropdown-item" >us 9,5</a>
-                <a class="dropdown-item" >us 10</a>
-                <a class="dropdown-item" >s 10,5</a>
-                <a class="dropdown-item" >us 11</a>
-                </div>       -->
+                  <p class="card-text">prijs: €<?php echo $res['price'];?></p>
+                  <!-- <input type="text" name="size" id="size"> -->      
                 </div>
               </div>
               <!-- Product actions-->
               <div class="card-footer p-4 pt-0 border-top-0 bg-transparent ">
                 <div class="text-center">
-                  <a class="btn btn-outline-dark mt-auto" href="#"
-                    >add to card</a
-                  >
+                      <input type="text" name="aantal" id="aantal">
+                      <input type="submit" name="action" class="btn btn-dark btn-sm text-white" value="Add to cart">
+                      <input type="hidden" name="productID" class="btn btn-dark btn-sm text-white" value="<?php echo $res['ID'] ?>">
+                  </form> 
                 </div>
               </div>
             </div>

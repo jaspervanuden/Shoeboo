@@ -52,7 +52,17 @@
           </ul>
           <form class="d-flex">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                <li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>
+            <li class="nav-item"><a class="nav-link" href="login.php">
+                <?php echo  isset($_SESSION["username"]) ? 'welkom ' .$_SESSION["username"] : 'Login' ;?>
+              </a></li>
+              <?php 
+                if(isset($_SESSION['username'])){
+                  echo '<li class="nav-item"><a class="nav-link" href="logout.php">logout</a></li>';
+              }
+              else {
+                echo '   ';
+              }
+              ?>
             </ul>
             <button>
             <a class="link-item text-dark" href="cart.php">
